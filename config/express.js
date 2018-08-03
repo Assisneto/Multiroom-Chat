@@ -9,7 +9,7 @@ let expressValidator = require('express-validator');
 let app = express();
 
 app.set('view engine', 'ejs');
-app.set('view','./app/views');
+app.set('views','./app/views'); // ambos os nomes tem que ser iguas
 
 app.use(express.static('./app/public'));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -20,6 +20,6 @@ consign()
     .then('app/models')
     .then('app/controllers')
     .into(app);
-    
+
 module.exports = app;
 
