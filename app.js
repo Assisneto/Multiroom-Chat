@@ -1,5 +1,11 @@
-let app = require('./config/express')
+let app  = require('./config/express');
+let io   = require('socket.io');
 
-app.listen(3000,()=>{
-    console.log('Servidor online na porta 3000')
+let porta = 3000;
+
+let server = app.listen(porta,()=>{
+    console.log(`Servidor online na porta ${porta}`)
 });
+
+io.listen(server);
+
