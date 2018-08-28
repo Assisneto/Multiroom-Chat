@@ -101,16 +101,17 @@
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container">
 				<div class="panel-body campo-mensagem">
-					<form>
+			
 						<div class="col-md-12">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Mensagem">
+								<input type="text" class="form-control" placeholder="Mensagem" id="mensagem">
+								<input type="hidden" value="<%=dataform.apelido%>" id="apelido">
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button">></button>
+									<button class="btn btn-default" type="button" id="enviar_mensagem">></button>
 								</span>
 							</div>
 						</div>
-					</form>
+			
 				</div>
 			</div>
 		</nav>		
@@ -120,7 +121,17 @@
 		<script src="/socket.io/socket.io.js"></script>
 		<script>
 			let porta = 3000;
-			let socket = io(`http://localhost:${porta}`)
+			let socket = io(`http://localhost:${porta}`);
+			
+			$('#enviar_mensagem').click(()=>{
+				
+				socket.emit(
+					'msgParaServidor',
+					{apelido: $('#apelido').val(),mensagem: $('#mensagem').val()}
+
+				);
+
+			});
 
 			socket.on('msgParaCliente',(data)=>{
 				let html = `<div class="dialogo">
