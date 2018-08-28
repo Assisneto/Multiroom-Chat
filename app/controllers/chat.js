@@ -12,5 +12,11 @@ module.exports.iniciaChat = (app,req,res) =>{
         return;
     }
 
+    app.get('io').emit(
+        'msgParaCliente',
+        {apelido: dataform.apelido, mensagem:`${dataform.apelido}, acabou de entrar no chat`}
+    )
+
+
     res.render("chat");
 }
